@@ -1,8 +1,9 @@
-#IFNDEF FDF_H
+#ifndef FDF_H
 
 #define FDF_H
-
-#include "libft.h"
-#include "get_next_line.h"
+#define ESC 53
+#include "./libft/libft.h"
+#include <stdlib.h>
+#include <string.h>
 
 #endif
