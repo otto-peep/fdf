@@ -8,22 +8,23 @@ FLAGS = -Wall -Wextra -Werror
 
 SRC = test.c
 
+HOMEPATH = -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+
+SCHPATH = -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
+
+OBJ = $(patsubst %.c,%.o,$(SRC))
+
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEAD)
+$(NAME):
 	make -C libft/
-	gcc -o $(NAME) $(SRC) -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
-
-.PHONY : clean fclean re all
+	gcc -o $(NAME) $(SRC) $(SCHPATH)
 
 clean :
 	make -C libft/ clean
-	/bin/rm -f $(OBJ)
 
 fclean :
 	make -C libft/ fclean
-	/bin/rm -f $(NAME)
+	rm -f $(NAME)
 
-re :
-	fclean all
-	
+re : fclean all
