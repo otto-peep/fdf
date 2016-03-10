@@ -1,12 +1,12 @@
 NAME = mlx
 
-HEAD = ./fdf.h
+HEAD = fdf.h
 
 PATH_LIB = ./libft/
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = test.c
+SRC = test.c	event.c		draw.c
 
 HOMEPATH = -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
@@ -17,7 +17,7 @@ OBJ = $(patsubst %.c,%.o,$(SRC))
 all: $(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(SRC) $(SCHPATH)
+	gcc -o $(NAME) $(SRC) -I $(HEAD) $(SCHPATH)
 
 clean :
 	make -C libft/ clean

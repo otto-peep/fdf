@@ -1,13 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 14:21:47 by pconin            #+#    #+#             */
+/*   Updated: 2016/03/10 15:24:45 by pconin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "mlx.h"
-
-int		key_h(int keycode, void *param)
-{
-	if (keycode == ESC)
-		exit(0);
-	ft_putnbr(keycode);
-	return (0);
-}
 
 void	seg_trace(int xa, int ya, int xb, int yb, void *win, void *mlx)
 {
@@ -39,23 +43,20 @@ void	seg_trace(int xa, int ya, int xb, int yb, void *win, void *mlx)
 
 int		main(void)
 {
-	void *mlx;
-	void *win;
 	int width;
 	int height;
-	void *image;
-	int x;
-	int y;
+	t_stock env;
 
-	x = 300;
-	y = 50;
+
 	width = 100;
 	height = 50;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "mlx 42");
-	seg_trace(x, y, 30, 200, win, mlx);
-	image = mlx_new_image(mlx, width, height);
-	mlx_key_hook(win, &key_h, 0);
-	mlx_loop(mlx);
+	env.mlx = mlx_init();
+	env.win = mlx_new_window(env.mlx, 400, 400, "mlx 42");
+	env.img_ptr = mlx_new_image(env.mlx, width, height);
+	env.img = mlx_get_data_addr(env.img_ptr, env.bpp, env.line, env.endi);
+	put_pixel_in_image(19, 25, env);
+	mlx_put_image_to_window(env.mlx, env.win, env.img_ptr, 10, 10);
+	mlx_key_hook(env.win, &key_h, 0);
+	mlx_loop(env.mlx);
 	return (0);
 }
