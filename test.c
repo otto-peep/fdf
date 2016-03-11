@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:21:47 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/11 17:15:33 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/11 18:03:39 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(void)
 	t_stock env;
 	int a;
 	a = 0;
-	char *color = "0xFFFFFF";
+	int color = 0xFFFFFF;
 	env.width = 500;
 	height = 500;
 	env.mlx = mlx_init();

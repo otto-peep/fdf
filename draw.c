@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:55:25 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/11 17:15:28 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/11 18:03:43 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void	put_pixel_in_image(int x, int y, t_stock env)
 
 	pl = (x * 4) + (y * env.line);
 	color = 0xff5ca1;
-	pl = 0;
-	ft_memcpy(&env.img[pl], &color, env.bpp);
+	env.img[pl] = color;
 }
