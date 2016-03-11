@@ -17,12 +17,14 @@ OBJ = $(patsubst %.c,%.o,$(SRC))
 all: $(NAME)
 
 $(NAME):
+	make -C libft/
 	gcc -o $(NAME) $(SRC) -I $(HEAD) $(SCHPATH)
 
 clean :
 	make -C libft/ clean
 
 fclean :
+	make -C libft/ fclean
 	rm -f $(NAME)
 
 re : fclean all

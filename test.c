@@ -6,14 +6,14 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:21:47 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/10 15:24:45 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/11 17:15:33 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-void	seg_trace(int xa, int ya, int xb, int yb, void *win, void *mlx)
+void	seg_trace(int xa, int ya, int xb, int yb, t_stock env)
 {
 	int dx;
 	int dy;
@@ -25,7 +25,7 @@ void	seg_trace(int xa, int ya, int xb, int yb, void *win, void *mlx)
 	y = ya;
 	dx = xb - xa;
 	dy = yb - ya;
-	mlx_pixel_put(mlx, win, x, y, 0x00FF00FF);
+	put_pixel_in_image(x, y, env);
 	cumul = dx/2;
 	while (x <= xb)
 	{
@@ -36,25 +36,26 @@ void	seg_trace(int xa, int ya, int xb, int yb, void *win, void *mlx)
 			cumul = cumul - dx;
 			y++;
 		}
-		mlx_pixel_put(mlx, win, x, y, 0x00FF00FF);
+		put_pixel_in_image(x, y, env);
 	}
 
 }
 
 int		main(void)
 {
-	int width;
 	int height;
 	t_stock env;
-
-
-	width = 100;
-	height = 50;
+	int a;
+	a = 0;
+	char *color = "0xFFFFFF";
+	env.width = 500;
+	height = 500;
 	env.mlx = mlx_init();
-	env.win = mlx_new_window(env.mlx, 400, 400, "mlx 42");
-	env.img_ptr = mlx_new_image(env.mlx, width, height);
-	env.img = mlx_get_data_addr(env.img_ptr, env.bpp, env.line, env.endi);
-	put_pixel_in_image(19, 25, env);
+	env.win = mlx_new_window(env.mlx, 600, 600, "mlx 42");
+	env.img_ptr = mlx_new_image(env.mlx, env.width, height);
+	env.line = env.width;
+	env.img = mlx_get_data_addr(env.img_ptr, &(env.bpp), &(env.line), &(env.endi));
+	seg_trace(10, 10, 400, 400, env);
 	mlx_put_image_to_window(env.mlx, env.win, env.img_ptr, 10, 10);
 	mlx_key_hook(env.win, &key_h, 0);
 	mlx_loop(env.mlx);
