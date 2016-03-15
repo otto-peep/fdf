@@ -6,7 +6,7 @@ PATH_LIB = ./libft/
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = test.c	event.c		draw.c
+SRC = file.c	error.c	test.c	event.c		draw.c
 
 HOMEPATH = -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:55:25 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/11 18:03:43 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/15 13:30:57 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,31 @@ void	put_pixel_in_image(int x, int y, t_stock env)
 	pl = (x * 4) + (y * env.line);
 	color = 0xff5ca1;
 	env.img[pl] = color;
+}
+
+void	seg_trace(int xa, int ya, int xb, int yb, t_stock env)
+{
+	int dx;
+	int dy;
+	int cumul;
+	int x;
+	int y;
+
+	x = xa;
+	y = ya;
+	dx = xb - xa;
+	dy = yb - ya;
+	put_pixel_in_image(x, y, env);
+	cumul = dx/2;
+	while (x <= xb)
+	{
+		x++;
+		cumul = cumul + dy;
+		if (cumul >= dx)
+		{
+			cumul = cumul - dx;
+			y++;
+		}
+		put_pixel_in_image(x, y, env);
+	}
 }
