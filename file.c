@@ -40,20 +40,20 @@ void	ft_newline(s_points *line, char *temp)
 
 s_points	*file_treat(char *file)
 {
-	s_points **line;
-	s_points *first;
-	int		fd;
-	char *temp;
-	int		ret;
+	s_points	*line;
+	s_points	*first;
+	int			fd;
+	char		*temp;
+	int			ret;
 
-	first = *line;
+	first = line;
 	temp = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error("open error");
 	while (ret == get_next_line(fd, &temp) > 0)
 	{
-		ft_newline(*line, temp);
+		ft_newline(line, temp);
 		free(temp);
 		temp = NULL;
 	}
@@ -61,5 +61,5 @@ s_points	*file_treat(char *file)
 		ft_error("gnl error");
 	if (close(fd) == -1)
 		ft_error("error during close");
-	return (line);
+	return (first);
 }

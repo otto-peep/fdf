@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "mlx.h"
 
 typedef struct s_points s_points;
 
@@ -36,6 +37,7 @@ void		seg_trace(int xa, int ya, int xb, int yb, t_stock env);
 void		ft_open_rdly(char *file);
 void		ft_error(char *str);
 void		ft_newline(s_points *line, char *temp);
-s_points		**file_treat(char *file);
+s_points	*file_treat(char *file);
+void		printline(s_points *line);
 
 #endif

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
 
 
 int		main(int argc, char **argv)
@@ -23,14 +22,16 @@ int		main(int argc, char **argv)
 	int color = 0xFFFFFF;
 	env.width = 500;
 	height = 500;
-	s_points **line;
+	s_points *line;
 
 	if (argc != 2)
 		ft_error("wrong number of argument");
 	line = file_treat(argv[1]);
-	while (*(line.x))
+	while (line)
 	{
-		ft_putnbr(*x);
+		printline(line);
+		line = line->next;
+	}
 
 //	env.mlx = mlx_init();
 //	env.win = mlx_new_window(env.mlx, 600, 600, "mlx 42");

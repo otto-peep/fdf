@@ -6,9 +6,9 @@ PATH_LIB = ./libft/
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = file.c	error.c	test.c	event.c		draw.c
+SRC = tools.c	file.c	error.c	test.c	event.c		draw.c
 
-HOMEPATH = -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 SCHPATH = -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
 
@@ -18,7 +18,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft/
-	gcc -o $(NAME) $(SRC) -I $(HEAD) $(SCHPATH)
+	gcc -o $(NAME) $(SRC) -I $(HEAD) $(HOMEPATH)
 
 clean :
 	make -C libft/ clean
