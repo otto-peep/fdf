@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:03 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/19 17:41:19 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/19 18:18:35 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	put_in_map(s_env *stock)
 	int		i;
 
 	i = 0;
+	ft_putstr(stock->file);
 	tab = ft_strsplit(stock->file, '\n');
+	i = 0;
 	stock->map = (int **)malloc(sizeof (int *) * (stock->len = ft_tablen(tab)));
 	while (tab[i])
 	{

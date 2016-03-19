@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 16:32:05 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/19 18:18:34 by pconin           ###   ########.fr       */
+/*   Created: 2016/03/19 17:49:18 by pconin            #+#    #+#             */
+/*   Updated: 2016/03/19 17:55:29 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+void	ft_puttabnbr(int	**tab)
 {
-	s_env	*stock;
+	int i;
+	int y;
 
-	stock = (s_env*) malloc (sizeof(s_env));
-	open_and_read(argv[1], argc, stock);
-	put_in_map(stock);
-	return (0);
+	i = 0;
+	while (tab[i])
+	{
+		y = 0;
+		while (tab[i][y])
+		{
+			ft_putnbr(tab[i][y]);
+			y++;
+		}
+		i++;
+	}
 }
+

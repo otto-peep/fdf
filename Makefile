@@ -9,7 +9,8 @@ FLAGS = -Wall -Wextra -Werror
 SRC = main.c		\
 	error.c			\
 	file.c			\
-	put_in_map.c
+	put_in_map.c	\
+	tools.c
 
 HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
