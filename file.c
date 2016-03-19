@@ -1,65 +1,41 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   file.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/15 13:31:01 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/15 17:12:03 by pconin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <fcntl.h>
 #include "fdf.h"
 
-void	ft_newline(s_points *line, char *temp)
+void		ft_readnly(int fd, char **dst, size_t size)
 {
-	s_points *new;
-	char **tab;
-	int		a;
-	
-	a = 0;
-	tab = ft_strsplit(temp, ' ');
-	while(temp[a])
-		a++;
-	new->x = malloc(sizeof (int) * (a + 1));
-	while (temp)
+	int	ret;
+	char buf[size + 1];
+	char *tmp;
+
+	*dst = (char *)malloc(sizeof(char) * 1);
+	ft_bzero(*dst, 1);
+	while ((ret = read(fd, buf, size)) > 0)
 	{
-		new->x[a] = ft_atoi(temp);
-		a++;
-		temp++;
+		buf[ret] = '\0';
+		tmp = ft_strjoin(*dst, buf);
+		free(*dst);
+		*dst = tmp;
 	}
-	new->x[a] = '\0';
-	new->size_line = a;
-	while (line->next != NULL)
-		line = line->next;
-	line->next = new;
-	new->next = NULL;
+	if (ret < 0)
+		ft_error("error during read");
+	free(tmp);
 }
 
-s_points	*file_treat(char *file)
+int		ft_open_rdly(char *file)
 {
-	s_points	*line;
-	s_points	*first;
-	int			fd;
-	char		*temp;
-	int			ret;
+	int	fd;
 
-	first = line;
-	temp = NULL;
 	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		ft_error("open error");
-	while (ret == get_next_line(fd, &temp) > 0)
-	{
-		ft_newline(line, temp);
-		free(temp);
-		temp = NULL;
-	}
-	if (ret == -1)
-		ft_error("gnl error");
-	if (close(fd) == -1)
-		ft_error("error during close");
-	return (first);
+	if (fd 	< 0)
+		ft_error("error during open");
+	return (fd);
+}
+
+void	open_and_read(char *file, int argc, s_env *stock)
+{
+	int	fd;
+
+	if (argc != 2)
+		ft_error("wrong number of argument\n");	
+	fd = ft_open_rdly(file);
+	ft_readnly(fd, &(stock->file), BUFF_SIZE);	
 }

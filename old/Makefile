@@ -1,4 +1,4 @@
-NAME = fdf
+NAME = mlx
 
 HEAD = fdf.h
 
@@ -6,7 +6,7 @@ PATH_LIB = ./libft/
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.c	error.c		file.c
+SRC = tools.c	file.c	error.c	test.c	event.c		draw.c
 
 HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
