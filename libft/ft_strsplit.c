@@ -14,61 +14,46 @@
 #include <string.h>
 #include "libft.h"
 
-static int	words_nb(const char *s, char c)
+static 		size_t ft_wordscount(char *s, char c)
 {
-	int	i;
+	size_t nb;
 
-	i = 0;
-	while (*s)
+	while (*s && *s == c)
+		s++;
+	nb = (*s ? 1 : 0);
+	while (				*s)
 	{
-		while (*s == c)
-			s++;
-		if (*s && *s != c)
-		{
-			i++;
-			while (*s && *s != c)
-				s++;
-		}
-	}
-	return (i);
-}
-
-static int	word_len(const char *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (*s != c && *s)
-	{
-		i++;
+		if (*s == c && *(s + 1) && *(s + 1) != c)
+			nb++;
 		s++;
 	}
-	return (i);
+	return (nb);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char**ft_strsplit(char const *s, char c)
 {
-	char	**tab;
-	int		x;
-	int		y;
-	int		nbword;
+	size_t	words;
+	char	*start;
+	char	**result;
 
-	x = 0;
-	y = 0;
-	if (!s || !c)
+	if (s == NULL)
 		return (NULL);
-	nbword = words_nb(s, c);
-	tab = (char**)malloc(sizeof(char*) * nbword + 1);
-	if (tab == NULL)
+	words = ft_wordscount((char *)s, c);
+	if (!(result = (char **)malloc(sizeof(char *) * (words + 1))))
 		return (NULL);
-	while (x < nbword && s[y])
+	start = (char *)s;
+	while (*s)
 	{
-		while (s[y] == c && s[y])
-			y++;
-		tab[x] = ft_strsub(&s[y], 0, word_len(&s[y], c));
-		y = y + word_len(&s[y], c);
-		x++;
+		if (*s == c)
+		{
+			if (start != s)
+				*(result++) = ft_strsub(start, 0, s - start);
+			start = (char *)s + 1;
+		}
+		s++;
 	}
-	tab[x] = NULL;
-	return (tab);
+	if (start != s)
+		*(result++) = ft_strsub(start, 0, s - start);
+	*result = NULL;
+	return (result - words);
 }

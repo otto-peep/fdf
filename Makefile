@@ -10,7 +10,9 @@ SRC = main.c		\
 	error.c			\
 	file.c			\
 	put_in_map.c	\
-	tools.c
+	tools.c			\
+	window.c		\
+	draw.c
 
 HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
@@ -22,7 +24,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft/
-	gcc -o $(NAME) $(SRC) -I $(HEAD) $(SCHPATH)
+	gcc -o $(NAME) $(SRC) -I $(HEAD) $(HOMEPATH)
 
 clean :
 	make -C libft/ clean

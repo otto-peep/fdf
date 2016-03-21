@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int		*parse_line(char *str)
+int		*parse_line(char *str, int width)
 {
 	int		*line;
 	char	**tab;
@@ -20,7 +20,8 @@ int		*parse_line(char *str)
 
 	i = 0;
 	tab = ft_strsplit(str, ' ');
-	line = (int *)malloc(sizeof (int) * (ft_tablen(tab)));
+	line = (int *)malloc(sizeof (int) * (width + 1));
+	line = ft_memset(line, 0, width + 1);
 	while (tab[i])
 	{
 		line[i] = ft_atoi(tab[i]);
@@ -35,8 +36,25 @@ int		ft_tablen(char **tab)
 
 	len = 0;
 	while(tab[len])
+	{
 		len++;
+	}
 	return (len);
+}
+
+int		ft_foundwidth(char *str)
+{
+	int i;
+	static int w = 0;
+	char **tab;
+
+	i = 0;
+	tab = ft_strsplit(str, ' ');
+	while (tab[i])
+		i++;
+	if (i > w)
+		w = i;
+	return (w);
 }
 
 void	put_in_map(s_env *stock)
@@ -46,13 +64,23 @@ void	put_in_map(s_env *stock)
 	int		i;
 
 	i = 0;
-	ft_putstr(stock->file);
 	tab = ft_strsplit(stock->file, '\n');
-	i = 0;
-	stock->map = (int **)malloc(sizeof (int *) * (stock->len = ft_tablen(tab)));
+	stock->len = ft_tablen(tab);
+	stock->map = (int **)malloc(sizeof (int *) * (stock->len + 1));
 	while (tab[i])
 	{
-		stock->map[i] = parse_line(tab[i]);
+		stock->width = ft_foundwidth(tab[i]);
 		i++;
 	}
+	i = 0;
+	while (tab[i])
+	{
+		stock->map[i] = parse_line(tab[i], stock->width);
+		i++;
+	}
+	ft_putnbr(stock->len);
+	ft_putstr("\n");
+	ft_putnbr(stock->width);
+	ft_putstr("\n");
+	ft_puttabnbr(stock->map, stock->len, stock->width);
 }

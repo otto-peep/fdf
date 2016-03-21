@@ -12,20 +12,21 @@
 
 #include "fdf.h"
 
-void	ft_puttabnbr(int	**tab)
+void	ft_puttabnbr(int	**tab, int len, int width)
 {
 	int i;
 	int y;
 
 	i = 0;
-	while (tab[i])
+	while (i < len)
 	{
 		y = 0;
-		while (tab[i][y])
+		while (y < width)
 		{
 			ft_putnbr(tab[i][y]);
 			y++;
 		}
+		ft_putchar('\n');
 		i++;
 	}
 }
