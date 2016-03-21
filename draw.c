@@ -5,12 +5,12 @@ void	put_pixel_in_image(int x, int y, s_env *stock)
 	int pl;
 	int color;
 
-	pl = (x * 4) + (y * stock->width);
+	pl = (x * 4) + (y * stock->line);
 	color = 0xff5ca1;
 	stock->img[pl] = color;
 }
 
-void	seg_trace(int xa, int ya, int xb, int yb, s_env *stock)
+void	seg_trace(int *a, int *b, s_env *stock)
 {
 	int dx	;
 	int dy;
@@ -18,13 +18,21 @@ void	seg_trace(int xa, int ya, int xb, int yb, s_env *stock)
 	int x;
 	int y;
 
-	x = xa;
-	y = ya;
-	dx = xb - xa;
-	dy = yb - ya;
+	ft_putnbr(a[0]);
+	ft_putchar('\n');
+	ft_putnbr(a[1]);
+	ft_putchar('\n');
+	ft_putnbr(b[0]);
+	ft_putchar('\n');
+	ft_putnbr(b[1]);
+	ft_putchar('\n');
+	x = a[0];
+	y = a[1];
+	dx = b[0] - a[0];
+	dy = b[1] - a[1];
 	put_pixel_in_image(x, y, stock);
 	cumul = dx/2;
-	while (x <= xb)
+	while (x <= b[0])
 	{
 		x++;
 		cumul = cumul + dy;
@@ -37,3 +45,4 @@ void	seg_trace(int xa, int ya, int xb, int yb, s_env *stock)
 	}
 }
 // width est peut etre trop grande (+1 a cause du malloc
+

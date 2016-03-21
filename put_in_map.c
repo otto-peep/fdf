@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:03 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/19 18:18:35 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/21 17:57:49 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,4 @@ void	put_in_map(s_env *stock)
 		stock->map[i] = parse_line(tab[i], stock->width);
 		i++;
 	}
-	ft_putnbr(stock->len);
-	ft_putstr("\n");
-	ft_putnbr(stock->width);
-	ft_putstr("\n");
-	ft_puttabnbr(stock->map, stock->len, stock->width);
 }

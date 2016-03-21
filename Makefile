@@ -12,7 +12,8 @@ SRC = main.c		\
 	put_in_map.c	\
 	tools.c			\
 	window.c		\
-	draw.c
+	draw.c			\
+	tab.c
 
 HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
