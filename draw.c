@@ -79,13 +79,15 @@ void	draw_tab(s_env *stock)
 	int y;
 
 	x = 0;
-	while (x < (stock->len - 4))
+	while (x < (stock->len))
 	{
 		y = 0;
-		while (y < (stock->width - 4))
+		while (y < (stock->width))
 		{
-			seg_trace(stock->tmp[x][y], stock->tmp[x][y + 1], stock);
-			seg_trace(stock->tmp[x][y], stock->tmp[x + 1][y], stock);
+			if (x < (stock->len - 1))
+				seg_trace(stock->tmp[x][y], stock->tmp[x + 1][y], stock);
+			if (y < (stock->width - 1))
+				seg_trace(stock->tmp[x][y], stock->tmp[x][y + 1], stock);
 			y++;
 		}
 		x++;

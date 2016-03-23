@@ -24,10 +24,12 @@ void	ft_setwin(s_env *stock)
 	stock->bpp = 0;
 	stock->line = 0;
 	stock->endi = 0;
+//	ft_init_tab(stock);
+//	ft_free_tab(stock->tmp, stock);
 	ft_tab_iso(stock);
 	stock->mlx = mlx_init();
-	stock->win = mlx_new_window(stock->mlx, 600, 600, "Fil de Fer 42");
-	stock->img_ptr = mlx_new_image(stock->mlx, 600, 600);
+	stock->win = mlx_new_window(stock->mlx, 2000, 2000, "Fil de Fer 42");
+	stock->img_ptr = mlx_new_image(stock->mlx, 2000, 2000);
 	stock->img = mlx_get_data_addr(stock->img_ptr, &(stock->bpp), &(stock->line), &(stock->endi));
 	draw_tab(stock);
 	mlx_put_image_to_window(stock->mlx, stock->win, stock->img_ptr, 10, 10);

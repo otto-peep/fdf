@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:34:39 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/21 18:05:30 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/23 17:33:09 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_init_tab(s_env *stock)
 		while (y < stock->width)
 		{
 			stock->tmp[x][y] = (int *) malloc (sizeof(int) * 3);
-			stock->tmp[x][y][0] =  10 * x;
-			stock->tmp[x][y][1] = 10 * y;
+			stock->tmp[x][y][0] = x;
+			stock->tmp[x][y][1] = y;
 			y++;
 		}
 		x++;

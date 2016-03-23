@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:03 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/21 17:57:49 by pconin           ###   ########.fr       */
+/*   Updated: 2016/03/23 16:05:04 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		*parse_line(char *str, int width)
 	line = ft_memset(line, 0, width + 1);
 	while (tab[i])
 	{
-		line[i] = (100 * ft_atoi(tab[i]));
+		ft_putnbr(ft_atoi(tab[i]));
+		line[i] = ft_atoi(tab[i]);
 		i++;
 	}
 	return (line);
