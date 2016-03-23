@@ -6,86 +6,85 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 16:27:59 by pconin            #+#    #+#             */
-/*   Updated: 2016/02/18 14:19:30 by pconin           ###   ########.fr       */
+/*   Updated: 2016/02/03 19:14:09 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <stdlib.h>
 #include "get_next_line.h"
+#include <unistd.h>
 
-static int		found_newline(char *tmp)
+size_t		found_newline(char *tmp)
 {
-	int a;
+	int i;
 
-	a = 0;
-	while (tmp[a])
-	{
-		if (tmp[a] == SPLITTER || tmp[a] == '\0')
-			break ;
-		a++;
-	}
-	return (a);
+	i = 0;
+	while (tmp[i] != '\n' && tmp[i])
+		i++;
+	return (i);
 }
 
-static int		newline(char *tmp)
+size_t		newline(char *tmp)
 {
 	int i;
 
 	i = 0;
 	while (tmp[i])
 	{
-		if (tmp[i] == SPLITTER)
+		if (tmp[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static void		ft_read(int fd, char **tmp, int *ret)
+void	ft_read(int fd, char **tmp, int *ret)
 {
-	char buf[BUFF_SIZE + 1];
-	char *rmb;
+	char *buf;
+	char *mem;
 
-	rmb = NULL;
-	while ((*ret = read(fd, buf, BUFF_SIZE)) > 0)
-	{
-		buf[*ret] = '\0';
-		rmb = *tmp;
-		*tmp = ft_strjoin(*tmp, buf);
-		free(rmb);
-		rmb = NULL;
-		if (newline(*tmp) == 1)
-			break ;
-	}
+	mem = NULL;
+	buf = NULL;
+	buf = ft_strnew(BUFF_SIZE + 1);
+	*ret = read(fd, buf, BUFF_SIZE);
+	if (*ret == -1)
+		return ;
+	mem = *tmp;
+	*tmp = ft_strjoin(*tmp, buf);
+	free(mem);
+	free(buf);
 	return ;
 }
 
-int				get_next_line(int const fd, char **line)
+int		get_next_line(int const fd, char **line)
 {
-	static char	*tmp[256];
+	static char *tmp;
 	int			ret;
 	char		*mem;
 
-	ret = 0;
+	ret = 1;
 	mem = NULL;
-	if (fd < 0 || line == NULL || BUFF_SIZE <= 0 || fd > 256)
+	if (tmp == NULL)
+		tmp = ft_strnew(BUFF_SIZE + 1);
+	if (fd < 0 || line == NULL)
 		return (-1);
-	if (tmp[fd] == NULL)
-		tmp[fd] = ft_strnew(BUFF_SIZE + 1);
-	if (!(newline(tmp[fd])) && tmp[fd] != NULL)
-		ft_read(fd, &tmp[fd], &ret);
-	if (ret < 0 || tmp[fd] == NULL)
+	while (ret > 0 && newline(tmp) == 0 && tmp != NULL)
+	{
+		ft_read(fd, &tmp, &ret);
+		if (found_newline(tmp) != ft_strlen(tmp) || ret == -1)
+			break ;
+	}
+	if (ret == -1 || tmp == NULL)
 		return (-1);
-	*line = ft_strsub(tmp[fd], 0, found_newline(tmp[fd]));
-	if (!(ft_strlen(tmp[fd])) && ret == 0)
+	*line = ft_strsub(tmp, 0, found_newline(tmp));
+	if (!(ft_strlen(tmp)) && ret == 0)
 		return (0);
-	mem = tmp[fd];
-	tmp[fd] = ft_strsub(tmp[fd],
-			found_newline(tmp[fd]) + 1, ft_strlen(tmp[fd]));
+	mem = tmp;
+	tmp = ft_strsub(tmp, found_newline(tmp) + 1, ft_strlen(tmp));
 	free(mem);
 	return (1);
 }

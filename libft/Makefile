@@ -66,7 +66,7 @@ SRC =  ./get_next_line.c \
 	./ft_lstaddback.c	\
 	./ft_printbits.c
 
-OB =  ./get_next_line.o \
+OB = 	./get_next_line.o	\
 	./ft_putchar.o	\
 	./ft_putstr.o	\
 	./ft_strdup.o	\
@@ -132,8 +132,7 @@ OB =  ./get_next_line.o \
 	./ft_lstaddback.o	\
 	./ft_printbits.o
 
-HDER = ./libft.h \
-	   ./get_next_line.h
+HDER = ./libft.h
 
 all: $(NAME)
 

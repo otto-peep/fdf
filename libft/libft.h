@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 14:32:41 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/09 09:01:59 by pconin           ###   ########.fr       */
+/*   Updated: 2015/12/13 18:16:09 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int					get_next_line(int const fd, char **line);
+int					get_next_line(int fd, char **line);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 char				*ft_strcpy(char *dst, const char *src);

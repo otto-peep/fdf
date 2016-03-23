@@ -6,43 +6,88 @@ void	put_pixel_in_image(int x, int y, s_env *stock)
 	int color;
 
 	pl = (x * 4) + (y * stock->line);
-	color = 0xff5ca1;
+	color = 0x1984aa;
 	stock->img[pl] = color;
 }
 
 void	seg_trace(int *a, int *b, s_env *stock)
 {
-	int dx	;
+	int dx;
 	int dy;
-	int cumul;
+	int incx, incy, inc1, inc2;
+	int x, y;
+	int i, e;
+	if ((dx = b[0] - a[0]) < 0)
+		dx = -dx;
+	if ((dy = b[1] - a[1]) < 0)
+		dy = -dy;
+	incx = 1;
+	if (b[0] < a[0])
+		incx = -1;
+	incy = 1;
+	if (b[1] < a[1])
+		incy = -1;
+	x = a[0];
+	y = a[1];
+	if (dx > dy)
+	{
+		put_pixel_in_image(x, y, stock);
+		e = 2 * dy - dx;
+		inc1 = 2 * (dy - dx);
+		inc2 = 2 *dy;
+		i = 0;
+		while (i < dx)
+		{
+			if (e >= 0)
+			{
+				y = incy + y;
+				e = inc1 + e;
+			}
+			else
+				e = inc2+ e;
+			x = incx + x;
+			put_pixel_in_image(x, y, stock);
+			i++;
+		}
+	}
+	else
+	{
+		put_pixel_in_image(x, y, stock);
+		e = 2*dx - dy;
+		inc1 = 2*(dx - dy);
+		inc2 = 2 * dx;
+		i = 0;
+		while (i < dy)
+		{
+			if (e >= 0)
+			{
+				x = incx + x;
+				e = inc1 + e;
+			}
+			else
+				e = inc2 + e;
+			y = y + incy;
+			put_pixel_in_image(x, y, stock);
+			i++;
+		}
+	}
+}
+
+void	draw_tab(s_env *stock)
+{
 	int x;
 	int y;
 
-	ft_putnbr(a[0]);
-	ft_putchar('\n');
-	ft_putnbr(a[1]);
-	ft_putchar('\n');
-	ft_putnbr(b[0]);
-	ft_putchar('\n');
-	ft_putnbr(b[1]);
-	ft_putchar('\n');
-	x = a[0];
-	y = a[1];
-	dx = b[0] - a[0];
-	dy = b[1] - a[1];
-	put_pixel_in_image(x, y, stock);
-	cumul = dx/2;
-	while (x <= b[0])
+	x = 0;
+	while (x < (stock->len - 4))
 	{
-		x++;
-		cumul = cumul + dy;
-		if (cumul >= dx)
+		y = 0;
+		while (y < (stock->width - 4))
 		{
-			cumul = cumul - dx;
+			seg_trace(stock->tmp[x][y], stock->tmp[x][y + 1], stock);
+			seg_trace(stock->tmp[x][y], stock->tmp[x + 1][y], stock);
 			y++;
 		}
-		put_pixel_in_image(x, y, stock);
+		x++;
 	}
 }
-// width est peut etre trop grande (+1 a cause du malloc
-

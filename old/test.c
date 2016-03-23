@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 	env.img_ptr = mlx_new_image(env.mlx, env.width, height);
 	env.line = env.width;
 	env.img = mlx_get_data_addr(env.img_ptr, &(env.bpp), &(env.line), &(env.endi));
-	seg_trace(10, 10, 400, 400, env);
+	seg_trace(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), env);
 	ft_putnbr(env.line);
 	ft_putchar('\n');
 	ft_putnbr(env.bpp);

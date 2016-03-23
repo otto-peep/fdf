@@ -69,9 +69,10 @@ void		ft_setwin(s_env *stock);
 // draw.c
 void		put_pixel_in_image(int x, int y, s_env *stock);
 void		seg_trace(int *a, int *b, s_env *stock);
-
+void		draw_tab(s_env *stock);
 // tab.c
 void		ft_init_tab(s_env *stock);
 void		ft_free_tab(int ***tab, s_env *stock);
-
+// function.c
+void		ft_tab_iso(s_env *stock);
 #endif

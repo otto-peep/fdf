@@ -24,7 +24,7 @@ int		*parse_line(char *str, int width)
 	line = ft_memset(line, 0, width + 1);
 	while (tab[i])
 	{
-		line[i] = ft_atoi(tab[i]);
+		line[i] = (100 * ft_atoi(tab[i]));
 		i++;
 	}
 	return (line);

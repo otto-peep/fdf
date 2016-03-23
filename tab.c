@@ -46,8 +46,8 @@ void	ft_init_tab(s_env *stock)
 		while (y < stock->width)
 		{
 			stock->tmp[x][y] = (int *) malloc (sizeof(int) * 3);
-			stock->tmp[x][y][0] = x;
-			stock->tmp[x][y][1] = y;
+			stock->tmp[x][y][0] =  10 * x;
+			stock->tmp[x][y][1] = 10 * y;
 			y++;
 		}
 		x++;

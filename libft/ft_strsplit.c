@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/05 14:53:58 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/18 02:29:04 by pconin           ###   ########.fr       */
+/*   Updated: 2015/12/24 19:34:53 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,61 @@
 #include <string.h>
 #include "libft.h"
 
-static 		size_t ft_wordscount(char *s, char c)
+static int	words_nb(const char *s, char c)
 {
-	size_t nb;
+	int	i;
 
-	while (*s && *s == c)
-		s++;
-	nb = (*s ? 1 : 0);
-	while (				*s)
-	{
-		if (*s == c && *(s + 1) && *(s + 1) != c)
-			nb++;
-		s++;
-	}
-	return (nb);
-}
-
-char**ft_strsplit(char const *s, char c)
-{
-	size_t	words;
-	char	*start;
-	char	**result;
-
-	if (s == NULL)
-		return (NULL);
-	words = ft_wordscount((char *)s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (words + 1))))
-		return (NULL);
-	start = (char *)s;
+	i = 0;
 	while (*s)
 	{
-		if (*s == c)
+		while (*s == c)
+			s++;
+		if (*s && *s != c)
 		{
-			if (start != s)
-				*(result++) = ft_strsub(start, 0, s - start);
-			start = (char *)s + 1;
+			i++;
+			while (*s && *s != c)
+				s++;
 		}
+	}
+	return (i);
+}
+
+static int	word_len(const char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (*s != c && *s)
+	{
+		i++;
 		s++;
 	}
-	if (start != s)
-		*(result++) = ft_strsub(start, 0, s - start);
-	*result = NULL;
-	return (result - words);
+	return (i);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	**tab;
+	int		x;
+	int		y;
+	int		nbword;
+
+	x = 0;
+	y = 0;
+	if (!s || !c)
+		return (NULL);
+	nbword = words_nb(s, c);
+	tab = (char**)malloc(sizeof(char*) * nbword + 1);
+	if (tab == NULL)
+		return (NULL);
+	while (x < nbword && s[y])
+	{
+		while (s[y] == c && s[y])
+			y++;
+		tab[x] = ft_strsub(&s[y], 0, word_len(&s[y], c));
+		y = y + word_len(&s[y], c);
+		x++;
+	}
+	tab[x] = NULL;
+	return (tab);
 }
