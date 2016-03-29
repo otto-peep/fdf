@@ -30,3 +30,41 @@ void	ft_tab_iso(s_env *stock)
 		x++;
 	}
 }
+
+void	ft_move_x(s_env *stock, int sign)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < stock->len)
+	{
+		y = 0;
+		while (y < stock->width)
+		{
+			stock->tmp[x][y][0] += 100 * sign;
+			y++;
+		}
+		x++;
+	}
+}
+
+void	ft_move_y(s_env *stock, int sign)
+{
+	int x;
+	int y;
+
+	if (stock->tmp[0][0][1] > (SCR_HEIGHT - 300) && sign == 1)
+		return ;
+	x = 0;
+	while (x < stock->len)
+	{
+		y = 0;
+		while (y < stock->width)
+		{
+			stock->tmp[x][y][1] += 100 * sign;
+			y++;
+		}
+		x++;
+	}
+}

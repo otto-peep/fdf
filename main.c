@@ -19,7 +19,6 @@ int		main(int argc, char **argv)
 	stock = (s_env*) malloc (sizeof(s_env));
 	open_and_read(argv[1], argc, stock);
 	put_in_map(stock);
-	ft_putnbr(stock->width);
 	ft_setwin(stock);
 	return (0);
 }

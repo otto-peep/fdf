@@ -20,11 +20,11 @@ int		*parse_line(char *str, int width)
 
 	i = 0;
 	tab = ft_strsplit(str, ' ');
-	line = (int *)malloc(sizeof (int) * (width + 1));
+	if ((line = (int *)malloc(sizeof (int) * (width + 1))) == NULL)
+		ft_error("error malloc");
 	line = ft_memset(line, 0, width + 1);
 	while (tab[i])
 	{
-		ft_putnbr(ft_atoi(tab[i]));
 		line[i] = ft_atoi(tab[i]);
 		i++;
 	}

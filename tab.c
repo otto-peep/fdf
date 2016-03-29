@@ -38,10 +38,12 @@ void	ft_init_tab(s_env *stock)
 	int y;
 
 	x = 0;
-	stock->tmp = (int ***) malloc(sizeof (int **) * (stock->len + 1));
+	if ((stock->tmp = (int ***) malloc(sizeof (int **) * (stock->len + 1))) == NULL)
+		ft_error("malloc error");
 	while (x < stock->len)
 	{
-		stock->tmp[x] = (int **) malloc (sizeof(int *) *(stock->width + 1));
+		if ((stock->tmp[x] = (int **) malloc (sizeof(int *) *(stock->width + 1))) == NULL)
+		ft_error("malloc error");
 		y = 0;
 		while (y < stock->width)
 		{

@@ -16,7 +16,13 @@
  // keyboard code
 #define ESC 53
 #define ENTER 36
+#define LEFT 123
+#define RIGHT 124
+#define UP 126
+#define DOWN 125
 
+#define SCR_HEIGHT 1000
+#define SCR_WIDTH 1000
 #define BUFF_SIZE 8
 #include "./libft/libft.h"
 #include <stdlib.h>
@@ -37,6 +43,7 @@ typedef struct s_env
 			// puis on draw le tab_temp
 	int			width;
 	int			len;
+	float		zoom;
 	int			**map;
 	char		*file;
 	// tools for mlx 
@@ -56,6 +63,7 @@ void		open_and_read(char *file, int argc, s_env *stock);
 void		ft_readnly(int fd, char **dst, size_t size);
 int			ft_open_rdly(char *file);
 // tools.c
+void		ft_putstr_win(s_env *stock);
 void		ft_puttabnbr(int **tab, int len, int width);
 // put_in_map.c
 int			*parse_line(char *str, int width);
@@ -63,7 +71,7 @@ int			ft_tablen(char **tab);
 int			ft_foundwidth(char *str);
 void		put_in_map(s_env *stock);
 //window.c
-int			key_h(int keycode, void *stock);
+int			key_h(int keycode, s_env *stock);
 void		ft_setwin(s_env *stock);
 
 // draw.c
@@ -75,4 +83,6 @@ void		ft_init_tab(s_env *stock);
 void		ft_free_tab(int ***tab, s_env *stock);
 // function.c
 void		ft_tab_iso(s_env *stock);
+void		ft_move_x(s_env *stock, int sign);
+void		ft_move_y(s_env *stock, int sign);
 #endif

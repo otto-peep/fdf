@@ -7,7 +7,10 @@ void	put_pixel_in_image(int x, int y, s_env *stock)
 
 	pl = (x * 4) + (y * stock->line);
 	color = 0x1984aa;
-	stock->img[pl] = color;
+	if (x >= 0 && y >= 0 && x < SCR_WIDTH && y < SCR_HEIGHT)
+		stock->img[pl] = color;
+	else
+		return ;
 }
 
 void	seg_trace(int *a, int *b, s_env *stock)

@@ -31,3 +31,8 @@ void	ft_puttabnbr(int	**tab, int len, int width)
 	}
 }
 
+void	ft_putstr_win(s_env *stock)
+{
+	mlx_string_put(stock->mlx, stock->win, 10, 10, 0xffffff, "Move = arrows");
+	mlx_string_put(stock->mlx, stock->win, 10, 25, 0xffffff, "Reinit = enter");
+}
