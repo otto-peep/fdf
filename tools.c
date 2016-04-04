@@ -35,4 +35,6 @@ void	ft_putstr_win(s_env *stock)
 {
 	mlx_string_put(stock->mlx, stock->win, 10, 10, 0xffffff, "Move = arrows");
 	mlx_string_put(stock->mlx, stock->win, 10, 25, 0xffffff, "Reinit = enter");
+	mlx_string_put(stock->mlx, stock->win, 10, 40, 0xffffff, "zoom + = 'P'");
+	mlx_string_put(stock->mlx, stock->win, 10, 55, 0xffffff, "zoom - = 'L'");
 }

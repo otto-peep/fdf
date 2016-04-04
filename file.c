@@ -29,7 +29,6 @@ void		ft_readnly(int fd, char **dst, size_t size)
 	}
 	if (ret < 0)
 		ft_error("error during read");
-	free(tmp);
 }
 
 int		ft_open_rdly(char *file)
@@ -49,5 +48,5 @@ void	open_and_read(char *file, int argc, s_env *stock)
 	if (argc != 2)
 		ft_error("wrong number of argument\n");	
 	fd = ft_open_rdly(file);
-	ft_readnly(fd, &(stock->file), BUFF_SIZE);	
+	ft_readnly(fd, &(stock->file), BUFF_SIZE);
 }

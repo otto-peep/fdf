@@ -39,6 +39,8 @@ int		ft_tablen(char **tab)
 	while(tab[len])
 	{
 		len++;
+		if (len > 10000)
+			ft_error("file error : len > 10000");
 	}
 	return (len);
 }
@@ -52,7 +54,11 @@ int		ft_foundwidth(char *str)
 	i = 0;
 	tab = ft_strsplit(str, ' ');
 	while (tab[i])
+	{
 		i++;
+		if (i > 10000)
+			ft_error("file error : width > 10000");
+	}
 	if (i > w)
 		w = i;
 	return (w);
