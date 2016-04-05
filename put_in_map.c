@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:03 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/23 16:05:04 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 14:05:32 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		*parse_line(char *str, int width)
 
 	i = 0;
 	tab = ft_strsplit(str, ' ');
-	if ((line = (int *)malloc(sizeof (int) * (width + 1))) == NULL)
+	if ((line = (int *)malloc(sizeof(int) * (width + 1))) == NULL)
 		ft_error("error malloc");
 	line = ft_memset(line, 0, width + 1);
 	while (tab[i])
@@ -36,7 +36,7 @@ int		ft_tablen(char **tab)
 	int	len;
 
 	len = 0;
-	while(tab[len])
+	while (tab[len])
 	{
 		len++;
 		if (len > 10000)
@@ -47,9 +47,9 @@ int		ft_tablen(char **tab)
 
 int		ft_foundwidth(char *str)
 {
-	int i;
-	static int w = 0;
-	char **tab;
+	int			i;
+	static int	w = 0;
+	char		**tab;
 
 	i = 0;
 	tab = ft_strsplit(str, ' ');
@@ -73,7 +73,7 @@ void	put_in_map(s_env *stock)
 	i = 0;
 	tab = ft_strsplit(stock->file, '\n');
 	stock->len = ft_tablen(tab);
-	stock->map = (int **)malloc(sizeof (int *) * (stock->len + 1));
+	stock->map = (int **)malloc(sizeof(int *) * (stock->len + 1));
 	while (tab[i])
 	{
 		stock->width = ft_foundwidth(tab[i]);

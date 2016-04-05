@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   function.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/05 14:02:48 by pconin            #+#    #+#             */
+/*   Updated: 2016/04/05 14:04:27 by pconin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	ft_tab_iso(s_env *stock, int zoom)
 {
-	int x;
-	int y;
-	float f;
+	int		x;
+	int		y;
+	float	f;
 
 	x = 0;
-	stock->tmp = (int ***) malloc(sizeof (int **) * (stock->len + 1));
+	stock->tmp = (int ***)malloc(sizeof(int **) * (stock->len + 1));
 	while (x < stock->len)
 	{
-		stock->tmp[x] = (int **) malloc (sizeof(int *) *(stock->width + 1));
+		stock->tmp[x] = (int **)malloc(sizeof(int *) * (stock->width + 1));
 		y = 0;
 		while (y < stock->width)
 		{
-			stock->tmp[x][y] = (int *) malloc (sizeof(int) * 3);
+			stock->tmp[x][y] = (int *)malloc(sizeof(int) * 3);
 			f = 15. + (35. + zoom) * (stock->rot_x * x + stock->rot_y * y);
-			stock->tmp[x][y][0] =  (int)(f + 0.5) + 200;
+			stock->tmp[x][y][0] = (int)(f + 0.5) + 200;
 			f = stock->rot_y * (stock->rot_y * x - stock->rot_x * y);
 			f -= 0.06 * stock->map[x][y];
 			f *= (35. + zoom);
-			stock->tmp[x][y][1] = (int) (f + 0.5) + 700; 
+			stock->tmp[x][y][1] = (int)(f + 0.5) + 700;
 			y++;
 		}
 		x++;

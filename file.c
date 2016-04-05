@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:07 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/23 15:42:25 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 14:01:10 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		ft_readnly(int fd, char **dst, size_t size)
 {
-	int	ret;
-	char buf[size + 1];
-	char *tmp;
+	int		ret;
+	char	buf[size + 1];
+	char	*tmp;
 
 	*dst = (char *)malloc(sizeof(char) * 1);
 	ft_bzero(*dst, 1);
@@ -31,22 +31,22 @@ void		ft_readnly(int fd, char **dst, size_t size)
 		ft_error("error during read");
 }
 
-int		ft_open_rdly(char *file)
+int			ft_open_rdly(char *file)
 {
-	int	fd;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd 	< 0)
+	if (fd < 0)
 		ft_error("error during open");
 	return (fd);
 }
 
-void	open_and_read(char *file, int argc, s_env *stock)
+void		open_and_read(char *file, int argc, s_env *stock)
 {
-	int	fd;
+	int		fd;
 
 	if (argc != 2)
-		ft_error("wrong number of argument\n");	
+		ft_error("wrong number of argument\n");
 	fd = ft_open_rdly(file);
 	ft_readnly(fd, &(stock->file), BUFF_SIZE);
 }

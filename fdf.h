@@ -6,49 +6,44 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:09 by pconin            #+#    #+#             */
-/*   Updated: 2016/03/21 17:57:33 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 14:38:38 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 
 # define FDF_H
- // keyboard code
-#define ESC 53
-#define ENTER 36
-#define LEFT 123
-#define RIGHT 124
-#define UP 126
-#define DOWN 125
-#define Z_PLUS 35
-#define Z_LESS 37
-#define KEY_C 8
-#define ROTX_PLUS 15
-#define ROTX_LESS 14
-#define ROTY_PLUS 3
-#define ROTY_LESS 2
-#define SCR_HEIGHT 1000
-#define SCR_WIDTH 1000
-#define BUFF_SIZE 8
-#include "./libft/libft.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "mlx.h"
-#include <fcntl.h>
-#include <math.h>
 
-typedef struct s_env s_env;
-typedef struct s_seg s_seg;
+# define ESC 53
+# define ENTER 36
+# define LEFT 123
+# define RIGHT 124
+# define UP 126
+# define DOWN 125
+# define Z_PLUS 35
+# define Z_LESS 37
+# define KEY_C 8
+# define ROTX_PLUS 15
+# define ROTX_LESS 14
+# define ROTY_PLUS 3
+# define ROTY_LESS 2
+# define SCR_HEIGHT 1200
+# define SCR_WIDTH 2400
+# define BUFF_SIZE 8
+# include "./libft/libft.h"
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "mlx.h"
+# include <fcntl.h>
+# include <math.h>
 
-typedef struct s_env
+typedef struct s_env	s_env;
+typedef struct s_seg	s_seg;
+
+typedef struct	s_env
 {	int			***tmp;
-			// en tab_temp[x][y][0] on a l'abscisse x du point et en tab_temp[x][y][1] on a l'ordonnee y du point
-			//	on malloc tab_temp en width*len
-			//	attention a l'ordre de malloc
-			// puis on parse le tableau 1 avec les coordonnees du premier tab on remplit [0] et [1] du second
-			// puis on draw le tab_temp
 	int			width;
 	int			len;
 	float		zoom;
@@ -67,7 +62,7 @@ typedef struct s_env
 	float		rot_y;
 }			t_env;
 
-typedef struct s_seg
+typedef struct	s_seg
 {
 	int		dx;
 	int		dy;
@@ -107,8 +102,8 @@ void		put_pixel_in_image(int x, int y, s_env *stock, int color);
 void		seg_trace_init(int *a, int *b, s_env *stock);
 void		seg_trace_1(s_env *stock, s_seg seg);
 void		seg_trace_2(s_env *stock, s_seg seg);
-void		draw_tab(s_env *stock);
 // tab.c
+void		draw_tab(s_env *stock);
 void		ft_init_tab(s_env *stock);
 void		ft_free_tab(int ***tab, s_env *stock);
 // function.c

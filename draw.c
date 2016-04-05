@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/05 14:11:33 by pconin            #+#    #+#             */
+/*   Updated: 2016/04/05 14:30:40 by pconin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	put_pixel_in_image(int x, int y, s_env *stock, int color)
 {
 	int pl;
 
-	pl = (x * 4) + (y * stock->line);
-
+	pl = (x * (stock->bpp / 8)) + (y * stock->line);
 	if (x >= 0 && y >= 0 && x < SCR_WIDTH && y < SCR_HEIGHT)
 		stock->img[pl] = color;
 	else
@@ -15,10 +26,10 @@ void	put_pixel_in_image(int x, int y, s_env *stock, int color)
 int		find_color(int za, int zb, int color)
 {
 	int d;
-	
+
 	d = za - zb;
 	if (color == 0)
-		return (0xCCCCCC);
+		return (0x0033CC33);
 	else
 		return (0x00ffffff);
 /*	else
@@ -41,6 +52,7 @@ int		find_color(int za, int zb, int color)
 void	seg_trace_init(int *a, int *b, s_env *stock)
 {
 	s_seg seg;
+
 	seg.color = find_color(a[2], b[2], stock->color);
 	if ((seg.dx = b[0] - a[0]) < 0)
 		seg.dx = -seg.dx;
@@ -74,7 +86,7 @@ void	seg_trace_1(s_env *stock, s_seg seg)
 				seg.e = seg.inc1 + seg.e;
 			}
 			else
-				seg.e = seg.inc2+ seg.e;
+				seg.e = seg.inc2 + seg.e;
 			seg.x = seg.incx + seg.x;
 			put_pixel_in_image(seg.x, seg.y, stock, seg.color);
 			seg.i++;
@@ -83,11 +95,12 @@ void	seg_trace_1(s_env *stock, s_seg seg)
 	else
 		seg_trace_2(stock, seg);
 }
+
 void	seg_trace_2(s_env *stock, s_seg seg)
 {
 	put_pixel_in_image(seg.x, seg.y, stock, seg.color);
-	seg.e = 2*seg.dx - seg.dy;
-	seg.inc1 = 2*(seg.dx - seg.dy);
+	seg.e = 2 * seg.dx - seg.dy;
+	seg.inc1 = 2 * (seg.dx - seg.dy);
 	seg.inc2 = 2 * seg.dx;
 	seg.i = 0;
 	while (seg.i < seg.dy)
@@ -102,27 +115,5 @@ void	seg_trace_2(s_env *stock, s_seg seg)
 		seg.y = seg.y + seg.incy;
 		put_pixel_in_image(seg.x, seg.y, stock, seg.color);
 		seg.i++;
-	}
-}
-
-
-void	draw_tab(s_env *stock)
-{
-	int x;
-	int y;
-
-	x = 0;
-	while (x < (stock->len))
-	{
-		y = 0;
-		while (y < (stock->width))
-		{
-			if (x < (stock->len - 1))
-				seg_trace_init(stock->tmp[x][y], stock->tmp[x + 1][y], stock);
-			if (y < (stock->width - 1))
-				seg_trace_init(stock->tmp[x][y], stock->tmp[x][y + 1], stock);
-			y++;
-		}
-		x++;
 	}
 }
