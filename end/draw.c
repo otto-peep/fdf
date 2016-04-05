@@ -6,13 +6,13 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 14:11:33 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 16:13:03 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 16:27:00 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	put_pixel_in_image(int x, int y, s_env *stock, int color)
+void	put_pixel_in_image(int x, int y, t_env *stock, int color)
 {
 	int pl;
 	int octet;
@@ -53,9 +53,9 @@ int		find_color(int za, int zb, int color)
 	}
 }
 
-void	seg_trace_init(int *a, int *b, s_env *stock)
+void	seg_trace_init(int *a, int *b, t_env *stock)
 {
-	s_seg seg;
+	t_seg seg;
 
 	seg.color = find_color(a[2], b[2], stock->color);
 	if ((seg.dx = b[0] - a[0]) < 0)
@@ -73,7 +73,7 @@ void	seg_trace_init(int *a, int *b, s_env *stock)
 	seg_trace_1(stock, seg);
 }
 
-void	seg_trace_1(s_env *stock, s_seg seg)
+void	seg_trace_1(t_env *stock, t_seg seg)
 {
 	if (seg.dx > seg.dy)
 	{
@@ -100,7 +100,7 @@ void	seg_trace_1(s_env *stock, s_seg seg)
 		seg_trace_2(stock, seg);
 }
 
-void	seg_trace_2(s_env *stock, s_seg seg)
+void	seg_trace_2(t_env *stock, t_seg seg)
 {
 	put_pixel_in_image(seg.x, seg.y, stock, seg.color);
 	seg.e = 2 * seg.dx - seg.dy;

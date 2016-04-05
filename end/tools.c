@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 17:49:18 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 16:07:39 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 16:20:17 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_puttabnbr(int **tab, int len, int width)
 	}
 }
 
-void	ft_putstr_win(s_env *stock)
+void	ft_putstr_win(t_env *stock)
 {
 	mlx_string_put(stock->mlx, stock->win, 10, 10, 0xffffff, "Move = arrows");
 	mlx_string_put(stock->mlx, stock->win, 10, 25, 0xffffff, "Reinit = enter");

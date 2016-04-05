@@ -6,13 +6,13 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:34:39 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 15:40:01 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 16:26:21 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_tab(s_env *stock)
+void	draw_tab(t_env *stock)
 {
 	int x;
 	int y;
@@ -33,7 +33,7 @@ void	draw_tab(s_env *stock)
 	}
 }
 
-void	ft_free_tab(int ***tab, s_env *stock)
+void	ft_free_tab(int ***tab, t_env *stock)
 {
 	int x;
 	int y;
@@ -53,7 +53,7 @@ void	ft_free_tab(int ***tab, s_env *stock)
 	free(tab);
 }
 
-void	ft_init_tab(s_env *stock)
+void	ft_init_tab(t_env *stock)
 {
 	int x;
 	int y;

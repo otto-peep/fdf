@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:09 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 16:14:13 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 16:35:31 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-typedef struct s_seg		s_seg;
-
-typedef struct	s_env{
+typedef struct	s_env
+{
 	int			***tmp;
 	int			width;
 	int			len;
@@ -58,49 +57,49 @@ typedef struct	s_env{
 	int			color;
 	float		rot_x;
 	float		rot_y;
-}			t_env;
+}				t_env;
 
 typedef struct	s_seg
 {
-	int		dx;
-	int		dy;
-	int		incx;
-	int		incy;
-	int		inc1;
-	int		inc2;
-	int		x;
-	int		y;
-	int		i;
-	int		e;
-	int		color;
-}			t_seg;
+	int			dx;
+	int			dy;
+	int			incx;
+	int			incy;
+	int			inc1;
+	int			inc2;
+	int			x;
+	int			y;
+	int			i;
+	int			e;
+	int			color;
+}				t_seg;
 
-void		ft_error(char *str);
-void		open_and_read(char *file, int argc, s_env *stock);
-void		ft_readnly(int fd, char **dst, size_t size);
-int			ft_open_rdly(char *file);
-void		ft_putstr_win(s_env *stock);
-void		ft_puttabnbr(int **tab, int len, int width);
-int			*parse_line(char *str, int width);
-int			ft_tablen(char **tab);
-int			ft_foundwidth(char *str);
-void		put_in_map(s_env *stock);
-int			key_h(int keycode, s_env *stock);
-void		key_h2(int keycode, s_env *stock);
-void		ft_setwin(s_env *stock);
-void		draw_init_window(s_env *stock, int zoom);
-void		put_pixel_in_image(int x, int y, s_env *stock, int color);
-void		seg_trace_init(int *a, int *b, s_env *stock);
-void		seg_trace_1(s_env *stock, s_seg seg);
-void		seg_trace_2(s_env *stock, s_seg seg);
-void		draw_tab(s_env *stock);
-void		ft_init_tab(s_env *stock);
-void		ft_free_tab(int ***tab, s_env *stock);
-void		ft_tab_iso(s_env *stock, int zoom);
-void		ft_move_x(s_env *stock, int sign);
-void		ft_move_y(s_env *stock, int sign);
-void		ft_change_color(s_env *stock);
-void		ft_rot_x(s_env *stock, int sign);
-void		ft_rot_y(s_env *stock, int sign);
+void			ft_error(char *str);
+void			open_and_read(char *file, int argc, t_env *stock);
+void			ft_readnly(int fd, char **dst, size_t size);
+int				ft_open_rdly(char *file);
+void			ft_putstr_win(t_env *stock);
+void			ft_puttabnbr(int **tab, int len, int width);
+int				*parse_line(char *str, int width);
+int				ft_tablen(char **tab);
+int				ft_foundwidth(char *str);
+void			put_in_map(t_env *stock);
+int				key_h(int keycode, t_env *stock);
+void			key_h2(int keycode, t_env *stock);
+void			ft_setwin(t_env *stock);
+void			draw_init_window(t_env *stock, int zoom);
+void			put_pixel_in_image(int x, int y, t_env *stock, int color);
+void			seg_trace_init(int *a, int *b, t_env *stock);
+void			seg_trace_1(t_env *stock, t_seg seg);
+void			seg_trace_2(t_env *stock, t_seg seg);
+void			draw_tab(t_env *stock);
+void			ft_init_tab(t_env *stock);
+void			ft_free_tab(int ***tab, t_env *stock);
+void			ft_tab_iso(t_env *stock, int zoom);
+void			ft_move_x(t_env *stock, int sign);
+void			ft_move_y(t_env *stock, int sign);
+void			ft_change_color(t_env *stock);
+void			ft_rot_x(t_env *stock, int sign);
+void			ft_rot_y(t_env *stock, int sign);
 
 #endif

@@ -6,25 +6,25 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/05 13:44:15 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 15:55:17 by pconin           ###   ########.fr       */
+/*   Updated: 2016/04/05 16:34:42 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_init_window(s_env *stock, int zoom)
+void	draw_init_window(t_env *stock, int zoom)
 {
 	ft_free_tab(stock->tmp, stock);
 	ft_tab_iso(stock, zoom);
 }
 
-int		key_h(int keycode, s_env *stock)
+int		key_h(int keycode, t_env *stock)
 {
 	stock->img_ptr = mlx_new_image(stock->mlx, SCR_WIDTH, SCR_HEIGHT);
 	stock->img = mlx_get_data_addr(stock->img_ptr,
 			&(stock->bpp), &(stock->line), &(stock->endi));
 	if (keycode == ENTER)
-		draw_init_window(stock, (stock->zoom = 4));
+		draw_init_window(stock, (stock->zoom));
 	if (keycode == ESC)
 		exit(0);
 	if (keycode == LEFT)
@@ -45,7 +45,7 @@ int		key_h(int keycode, s_env *stock)
 	return (0);
 }
 
-void	key_h2(int keycode, s_env *stock)
+void	key_h2(int keycode, t_env *stock)
 {
 	if (keycode == ROTX_PLUS)
 		ft_rot_x(stock, 1);
@@ -63,14 +63,14 @@ void	key_h2(int keycode, s_env *stock)
 	ft_putstr_win(stock);
 }
 
-void	ft_setwin(s_env *stock)
+void	ft_setwin(t_env *stock)
 {
 	stock->rot_x = 0.45;
 	stock->rot_y = 0.7;
 	stock->bpp = 0;
 	stock->line = 0;
 	stock->endi = 0;
-	stock->zoom = 5;
+	stock->zoom = 12;
 	stock->color = 0;
 	ft_init_tab(stock);
 	stock->mlx = mlx_init();
