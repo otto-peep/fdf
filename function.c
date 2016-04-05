@@ -15,16 +15,12 @@ void	ft_tab_iso(s_env *stock, int zoom)
 		while (y < stock->width)
 		{
 			stock->tmp[x][y] = (int *) malloc (sizeof(int) * 3);
-			f = 15. + (35. + zoom) * (0.82 * x + 0.57 * y);
+			f = 15. + (35. + zoom) * (stock->rot_x * x + stock->rot_y * y);
 			stock->tmp[x][y][0] =  (int)(f + 0.5) + 200;
-			f = 0.57 * (0.57 * x - 0.82 * y);
-			ft_putstr("\n");
-			ft_putnbr(stock->map[x][y]);
-			ft_putstr("\n");
+			f = stock->rot_y * (stock->rot_y * x - stock->rot_x * y);
 			f -= 0.06 * stock->map[x][y];
 			f *= (35. + zoom);
-			f += 533;
-			stock->tmp[x][y][1] = (int) (f + 0.5) + 200; 
+			stock->tmp[x][y][1] = (int) (f + 0.5) + 700; 
 			y++;
 		}
 		x++;

@@ -14,7 +14,8 @@ SRC = main.c		\
 	window.c		\
 	draw.c			\
 	tab.c			\
-	function.c
+	function.c		\
+	rot.c
 
 HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 

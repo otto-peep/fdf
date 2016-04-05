@@ -23,7 +23,10 @@
 #define Z_PLUS 35
 #define Z_LESS 37
 #define KEY_C 8
-
+#define ROTX_PLUS 15
+#define ROTX_LESS 14
+#define ROTY_PLUS 3
+#define ROTY_LESS 2
 #define SCR_HEIGHT 1000
 #define SCR_WIDTH 1000
 #define BUFF_SIZE 8
@@ -34,6 +37,7 @@
 #include <unistd.h>
 #include "mlx.h"
 #include <fcntl.h>
+#include <math.h>
 
 typedef struct s_env s_env;
 typedef struct s_seg s_seg;
@@ -59,6 +63,8 @@ typedef struct s_env
 	int			endi;
 	int			line;
 	int			color;
+	float		rot_x;
+	float		rot_y;
 }			t_env;
 
 typedef struct s_seg
@@ -92,6 +98,7 @@ int			ft_foundwidth(char *str);
 void		put_in_map(s_env *stock);
 //window.c
 int			key_h(int keycode, s_env *stock);
+void		key_h2(int keycode, s_env *stock);
 void		ft_setwin(s_env *stock);
 void		draw_init_window(s_env *stock, int zoom);
 
@@ -109,4 +116,8 @@ void		ft_tab_iso(s_env *stock, int zoom);
 void		ft_move_x(s_env *stock, int sign);
 void		ft_move_y(s_env *stock, int sign);
 void		ft_change_color(s_env *stock);
+// rot.c
+void		ft_rot_x(s_env *stock, int sign);
+void		ft_rot_y(s_env *stock, int sign);
+
 #endif

@@ -28,16 +28,32 @@ int		key_h(int keycode, s_env *stock)
 		draw_init_window(stock, stock->zoom--);
 	if (keycode == KEY_C)
 		ft_change_color(stock);
-	draw_tab(stock);
-	mlx_put_image_to_window(stock->mlx, stock->win, stock->img_ptr, 0, 0);
 	ft_putstr_win(stock);
 	ft_putstr("\n keycode :");
 	ft_putnbr(keycode);
+	key_h2(keycode, stock);
 	return (0);
+}
+
+void	key_h2(int keycode, s_env *stock)
+{
+	if (keycode == ROTX_PLUS)
+		ft_rot_x(stock, 1);
+	if (keycode == ROTX_LESS)
+		ft_rot_x(stock, -1);
+	if (keycode == ROTY_PLUS)
+		ft_rot_y(stock, 1);
+	if (keycode == ROTY_LESS)
+		ft_rot_y(stock, -1);
+	draw_tab(stock);
+	mlx_put_image_to_window(stock->mlx, stock->win, stock->img_ptr, 0, 0);
+	ft_putstr_win(stock);
 }
 
 void	ft_setwin(s_env *stock)
 {
+	stock->rot_x = 0.45;
+	stock->rot_y = 0.7;
 	stock->bpp = 0;
 	stock->line = 0;
 	stock->endi = 0;
