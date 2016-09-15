@@ -1,12 +1,14 @@
 NAME = fdf
 
-HEAD = fdf.h
+HEAD = ./include/
 
 PATH_LIB = ./libft/
 
+PATHSRC = ./src/
+
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.c		\
+FILES = main.c		\
 	error.c			\
 	file.c			\
 	put_in_map.c	\
@@ -17,9 +19,11 @@ SRC = main.c		\
 	function.c		\
 	rot.c
 
-HOMEPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+SRC = $(FILES:%c=$(PATHSRC)%c)
 
-SCHPATH = -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
+STATICPATH = -lm -L libft/ -lft -L./minilibx_macos -I./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+
+MLXPATH = -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 
@@ -27,7 +31,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft/
-	gcc -o $(NAME) $(SRC) -I $(HEAD) $(SCHPATH)
+	gcc $(FLAGS) -o $(NAME) $(SRC) -I $(HEAD) $(STATICPATH)
 
 clean :
 	make -C libft/ clean
