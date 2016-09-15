@@ -6,7 +6,7 @@
 /*   By: pconin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 16:32:07 by pconin            #+#    #+#             */
-/*   Updated: 2016/04/05 16:20:36 by pconin           ###   ########.fr       */
+/*   Updated: 2016/09/15 15:14:32 by pconin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void		ft_readnly(int fd, char **dst, size_t size)
 {
 	int		ret;
-	char	buf[size + 1];
+	char	buf[BUF_SIZE + 1];
 	char	*tmp;
 
 	*dst = (char *)malloc(sizeof(char) * 1);
 	ft_bzero(*dst, 1);
-	while ((ret = read(fd, buf, size)) > 0)
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		tmp = ft_strjoin(*dst, buf);
@@ -29,6 +29,7 @@ void		ft_readnly(int fd, char **dst, size_t size)
 	}
 	if (ret < 0)
 		ft_error("error during read");
+	size = size - 1;
 }
 
 int			ft_open_rdly(char *file)
