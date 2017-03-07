@@ -10,3 +10,6 @@ Display a 2d map in relief with an isometric view, control the point of view wit
 `./fdf "map_name"`
 
 some tests maps are contained in "testmap" repository.
+
+# Rate
+125/100
